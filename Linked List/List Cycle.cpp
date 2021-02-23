@@ -30,9 +30,9 @@ ListNode* Solution::detectCycle(ListNode* A)
     return NULL;
 }
 
-App 2 : Lengthy but new concept
-Ref : https://www.codesdope.com/blog/article/detect-and-remove-loop-in-a-linked-list/
-Ref : https://www.youtube.com/watch?v=Qo1GXMgIjxk&ab_channel=bhaicodekaro
+// App 2 : Lengthy but new concept
+// Ref : https://www.codesdope.com/blog/article/detect-and-remove-loop-in-a-linked-list/
+// Ref : https://www.youtube.com/watch?v=Qo1GXMgIjxk&ab_channel=bhaicodekaro
 
 ListNode* Solution::detectCycle(ListNode* A)
 {
