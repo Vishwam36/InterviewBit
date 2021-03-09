@@ -2,6 +2,7 @@
 // https://www.interviewbit.com/problems/inorder-traversal/
 // Good question, recursion not allowed
 // Ref : https://www.youtube.com/watch?v=5y_j0OqD7v8&t=346s
+// App 2 is easier
 
 /**
  * Definition for binary tree
@@ -13,6 +14,7 @@
  * };
  */
 
+// App 1:
 vector<int> Solution::inorderTraversal(TreeNode* root) 
 {
     vector<int> ans;
@@ -36,5 +38,44 @@ vector<int> Solution::inorderTraversal(TreeNode* root)
         s.pop();
     }
     
+    return ans;
+}
+
+// App 2:
+vector<int> Solution::inorderTraversal(TreeNode* root) 
+{
+    vector<int> ans;
+    
+    if(root == NULL)
+        return ans;
+        
+    stack<pair<TreeNode*, int> > s;
+    s.push({root,0});
+    
+    TreeNode* curr;
+
+    while(!s.empty())
+    {
+        curr = s.top().first;
+        
+        if(s.top().second == 0)
+        {
+            s.top().second++;
+            if(curr -> left != NULL)
+                s.push({curr -> left, 0});
+        }
+        else if(s.top().second == 1)
+        {
+            ans.push_back(curr -> val);
+            
+            s.top().second++;
+            if(curr -> right != NULL)
+                s.push({curr -> right, 0});
+        }
+        else
+        {
+            s.pop();
+        }
+    }
     return ans;
 }
