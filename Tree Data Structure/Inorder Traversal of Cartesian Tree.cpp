@@ -23,7 +23,7 @@ int maxIndex(vector<int> A, int i, int j)
     return maxIndex;
 }
 
-TreeNode* build(TreeNode* root, vector<int> v, int i, int j)
+TreeNode* build(vector<int> v, int i, int j)
 {
     if(i > j)
         return NULL;
@@ -35,15 +35,13 @@ TreeNode* build(TreeNode* root, vector<int> v, int i, int j)
     
     TreeNode* newNode = new TreeNode(v[index]);
     
-    newNode -> left = build(newNode, v, i, index-1);
-    newNode -> right = build(newNode, v, index+1, j);
+    newNode -> left = build(v, i, index-1);
+    newNode -> right = build(v, index+1, j);
     
     return newNode;
 }
 
 TreeNode* Solution::buildTree(vector<int> &A) 
 {
-    TreeNode* root;
-    root = build(root, A, 0, A.size()-1);
-    return root;
+    return build(A, 0, A.size()-1);
 }
