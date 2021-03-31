@@ -9,7 +9,7 @@ void rec(int index, vector<int> &temp, vector<int> A, vector<vector<int> > &v)
     for(int i = index; i < A.size(); ++i)
     {
         temp.push_back(A[i]);
-        rec(i+1, temp, A, n, v);
+        rec(i+1, temp, A, v);
         temp.pop_back();
     }
 }
