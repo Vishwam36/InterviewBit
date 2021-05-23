@@ -2,7 +2,7 @@
 // https://www.interviewbit.com/problems/majority-element/
 // App 1 is tricky, App 2 is easy
 
-// App 1:
+// App 1:Boyer–Moore majority vote algorithm
 int Solution::majorityElement(const vector<int> &A) 
 {
     int n = A.size(), maxIndex = 0, count = 1;
@@ -24,7 +24,7 @@ int Solution::majorityElement(const vector<int> &A)
 }
 
 
-// App 2: Boyer–Moore majority vote algorithm
+// App 2: Naive
 int Solution::majorityElement(const vector<int> &A) 
 {
     unordered_map<int, int> m;
