@@ -1,6 +1,6 @@
 // By Vishwam Shriram Mundada
 // https://www.interviewbit.com/old/problems/word-break/
-// Decent
+// Decent. 2 approaches
 
 /*
 Given a string A and a dictionary of words B, determine if A can be segmented into a space-separated sequence of one or more dictionary words.
@@ -35,6 +35,9 @@ Explanation 2:
     Return 0 ( corresponding to false ) because "a" cannot be segmented as "aaa".
 */
 
+
+// App 1 :
+
 int dp[6501];
 
 bool rec(int idx, string s, vector<string> &dict)
@@ -65,4 +68,67 @@ int Solution::wordBreak(string A, vector<string> &B)
     memset(dp, -1, sizeof(dp));
     dp[A.size()] = 1;
     return rec(0, A, B);
+}
+
+
+// App 2 : 
+// Trie solution
+
+struct Node
+{
+    bool isLeaf;
+    Node* children[26];
+};
+
+Node* globalRoot;
+
+void insert(Node* root, string s)
+{
+    for(auto ch : s)
+    {
+        if(!root->children[ch-'a'])
+            root->children[ch-'a'] = new Node();
+        
+        root = root->children[ch-'a'];
+    }
+    root->isLeaf = true;
+}
+
+int dp[6501];
+
+bool rec(int idx, string &s, Node* root)
+{
+    if(idx == s.size())
+        return true;
+    
+    if(dp[idx] != -1)
+        return dp[idx];
+    
+    bool ans = false;
+    for(int i = idx; i < s.size(); ++i)
+    {
+        if(root->children[s[i]-'a'])
+        {
+            root = root->children[s[i]-'a'];
+            
+            if(root->isLeaf)
+                ans = ans || rec(i+1, s, globalRoot);
+        }
+        else
+        {
+            break;
+        }
+    }
+    return dp[idx] = ans;
+}
+
+int Solution::wordBreak(string A, vector<string> &B) 
+{
+    Node* root = new Node();
+    for(auto s : B)
+        insert(root, s);
+    
+    memset(dp, -1, sizeof(dp));
+    globalRoot = root;
+    return rec(0, A, globalRoot);
 }
