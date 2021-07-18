@@ -21,31 +21,37 @@ Output:[3, 4]
 A = 3, B = 4
 */
 
+// App 1 : based on Maths
+
+vector<int> Solution::repeatedNumber(const vector<int> &A) 
+{
+    long long n = A.size();
+    long long sum = 0;
+    long long sum_sq = 0;
+    long long sum_expected = ((n)*(n+1))/2;
+    long long sum_sq_expected = ((n)*(n+1)*(2*n+1))/6;
+    
+    for(int i = 0; i < n; ++i)
+    {
+        sum += (long long)A[i];
+        sum_sq += (long long)A[i]*A[i];
+    }
+    
+    long long a_minus_b = sum - sum_expected;
+    long long a_minus_b_into_a_plus_b = sum_sq - sum_sq_expected;
+    long long a_plus_b = a_minus_b_into_a_plus_b / a_minus_b;
+    
+    int a = (a_minus_b + a_plus_b) / 2;
+    int b = a_plus_b - a;
+    
+    return {a,b};
+}
+
+// App 2 : Difficult
+
 vector<int> Solution::repeatedNumber(const vector<int> &A) 
 {
     int n = A.size();
-    
-    // Approach 1 : doesnt work for big integers
-    
-    // long long sum = 0;
-    // long long sum_sq = 0;
-    // long long sum_expected = ((n)*(n+1))/2;
-    // long long sum_sq_expected = ((n)*(n+1)*(2*n+1))/6;
-    
-    // for(int i = 0; i < n; ++i)
-    // {
-    //     sum += A[i];
-    //     sum_sq += A[i]*A[i];
-    // }
-    
-    // long long a_minus_b = sum - sum_expected;
-    // long long a_minus_b_into_a_plus_b = sum_sq - sum_sq_expected;
-    // long long a_plus_b = a_minus_b_into_a_plus_b / a_minus_b;
-    
-    // int a = (a_minus_b + a_plus_b) / 2;
-    // int b = a_plus_b - a;
-    
-    // return {a,b};
     
     int a_xor_b = 0;
     for(int val : A)
