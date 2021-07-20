@@ -35,7 +35,7 @@ Explanation 2:
     Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut.
 */
 
-int dp[502][502];
+int dp[502];
 
 bool isPali(string &s, int l, int r)
 {
@@ -48,14 +48,14 @@ bool isPali(string &s, int l, int r)
 
 int rec(string &s, int l, int r)
 {
-    if(dp[l][r] != -1)
-        return dp[l][r];
+    if(dp[l] != -1)
+        return dp[l];
     
     if(l == r)
-        return dp[l][r] = 0;
+        return dp[l] = 0;
     
     if(isPali(s, l, r))
-        return dp[l][r] = 0;
+        return dp[l] = 0;
     
     int ans = INT_MAX;
     for(int k = l; k < r; ++k)
@@ -65,7 +65,7 @@ int rec(string &s, int l, int r)
             ans = min(ans, rec(s, l, k) + rec(s, k+1, r) + 1);
         }
     }
-    return dp[l][r] = ans;
+    return dp[l] = ans;
 }
 
 int Solution::minCut(string A) 
